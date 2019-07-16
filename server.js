@@ -17,10 +17,6 @@ app.use('/graphql', expressGraphQL({
   graphiql: true,
 }));
 
-// app.listen(8080, () => {
-//   console.log('Running on 8080');
-// });
-
 // database connection
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-fhwxu.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`, { useNewUrlParser: true })
   .then(() => {

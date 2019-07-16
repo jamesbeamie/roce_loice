@@ -1,4 +1,5 @@
 const bycript = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
 
@@ -21,6 +22,30 @@ const userAuth = {
     } catch (err) {
       throw err;
     }
+  },
+  login: async ({ email, password }) => {
+    const presentUser = await User.findOne({ email });
+    if (!presentUser) {
+      throw new Error('No user');
+    }
+
+    const validPwd = bycript.compare(password, presentUser.password);
+
+    if (!validPwd) {
+      throw new Error('invalid pwd');
+    }
+
+    const userToken = jwt.sign({ userId: presentUser.id, email: presentUser.email },
+      'secretkeyfortoken',
+      {
+        expiresIn: '1hr',
+      });
+
+    return {
+      userId: presentUser.id,
+      token: userToken,
+      tokenExpires: 1,
+    };
   },
 };
 
