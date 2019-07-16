@@ -1,27 +1,27 @@
-// Schema goes here
+const { buildSchema } = require('graphql');
 
-// const { buildSchema } = require('grapql');
+const graphqlSchema = buildSchema(`
 
-// const graphqlSchema = buildSchema(`
+    type User{
+        _id: ID!
+        userName: String!
+        email: String!
+        password: String!
+    }
+    input userInput{
+        userName: String!
+        email: String!
+        password: String!
+    }
 
-//     type user{
-//         userName: String!
-//         email: String!
-//         password: String!
-//     }
-
-//     type blog{
-//         image: File!
-//         caption: String!
-//     }
-//     type rootQuery{}
-//     type rootMutation{}
+    type rootMutation{
+        createUser(userInput: userInput): User
+    }
 
 
-//     schema{
-//         query: rootQuery
-//         mutation: rootMutation
-//     }
-// `)
+    schema{
+        mutation: rootMutation
+    }
+`);
 
-// module.exports = graphqlSchema;
+module.exports = graphqlSchema;
