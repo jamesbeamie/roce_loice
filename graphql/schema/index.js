@@ -13,7 +13,14 @@ const graphqlSchema = buildSchema(`
         email: String!
         password: String!
     }
-
+    type authData{
+        userId: ID!
+        token: String!
+        tokenExpires: Int!
+    }
+    type rootQuery{
+        login(email: String!, password: String!): authData
+    }
     type rootMutation{
         createUser(userInput: userInput): User
     }
@@ -21,6 +28,7 @@ const graphqlSchema = buildSchema(`
 
     schema{
         mutation: rootMutation
+        query: rootQuery
     }
 `);
 
