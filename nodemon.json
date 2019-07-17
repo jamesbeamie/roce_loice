@@ -2,6 +2,9 @@
     "env": {
         "MONGO_USER": "james",
         "MONGO_PASSWORD": "glJOadOY0ALfbR06",
-        "MONGO_DB": "homes-dev-db"
+        "MONGO_DB": "homes-dev-db",
+        "FB_CLIENT_ID": "445830769573071",
+        "FB_CLIENT_SECRET": "b08db6fbd09334b6349753e7ed8fb2f0",
+        "FB_CALLBACK_URL": "https://ae042f94.ngrok.io/auth/facebook/callback"
     }
 }
