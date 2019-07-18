@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressGraphQL = require('express-graphql');
 const mongoose = require('mongoose');
+const { apolloUploadExpress } = require('apollo-upload-server');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook');
 
@@ -11,7 +12,7 @@ const rootResolver = require('./graphql/resolvers/index');
 // middleware
 const app = express();
 app.use(bodyParser.json());
-
+app.use(apolloUploadExpress({ uploadDir: './ ' }));
 
 app.use('/graphql', expressGraphQL({
   schema: graphQLSchema,
