@@ -8,11 +8,14 @@ const FacebookStrategy = require('passport-facebook');
 
 const graphQLSchema = require('./graphql/schema/index');
 const rootResolver = require('./graphql/resolvers/index');
+// const upload = require('./models/multerSave');
 
 // middleware
 const app = express();
 app.use(bodyParser.json());
 app.use(apolloUploadExpress({ uploadDir: './ ' }));
+// app.post('/upload', upload.fields([{ name: 'file' }]));
+
 
 app.use('/graphql', expressGraphQL({
   schema: graphQLSchema,

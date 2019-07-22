@@ -1,6 +1,14 @@
 const Image = require('../../models/Image');
 
 const uploadResolver = {
+  images: async () => {
+    try {
+      const image = await Image.find();
+      return image;
+    } catch (err) {
+      throw err;
+    }
+  },
   uploadFile: async (args) => {
     const image = new Image({
 

@@ -46,6 +46,7 @@ const graphqlSchema = buildSchema(`
     type rootQuery{
         blogs: [Blog!]!
         login(email: String!, password: String!): authData
+        images: [Img!]!
     }
     type rootMutation{
         createUser(userInput: userInput): User
