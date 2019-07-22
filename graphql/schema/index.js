@@ -18,11 +18,40 @@ const graphqlSchema = buildSchema(`
         token: String!
         tokenExpires: Int!
     }
+
+    type Blog{
+        _id: ID!
+        title: String!
+        description: String!
+    }
+    input blogInput{
+        title: String!
+        description: String!
+    }
+    
+    type Img{
+        _id: ID!
+        name: String!
+        type: String!
+        size: Int!
+        path: String!
+    }
+    input Upload{
+        name: String!
+        type: String!
+        size: Int!
+        path: String!
+    }
+
     type rootQuery{
+        blogs: [Blog!]!
         login(email: String!, password: String!): authData
+        images: [Img!]!
     }
     type rootMutation{
         createUser(userInput: userInput): User
+        createBlog(blogInput: blogInput): Blog
+        uploadFile(file: Upload!): Img
     }
 
 
