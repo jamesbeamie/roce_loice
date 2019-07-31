@@ -18,7 +18,10 @@ const blogResolver = {
       throw err;
     }
   },
-  createBlog: async (args) => {
+  createBlog: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
     const newBlog = new Blog({
       title: args.blogInput.title,
       description: args.blogInput.description,
@@ -51,7 +54,10 @@ const blogResolver = {
       throw err;
     }
   },
-  deleteBlog: async (args) => {
+  deleteBlog: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
     // eslint-disable-next-line no-underscore-dangle
     const isAvailable = await Blog.findById(args.deleteBlogInput._id);
     try {
