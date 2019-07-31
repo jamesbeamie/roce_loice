@@ -18,7 +18,10 @@ const blogResolver = {
       throw err;
     }
   },
-  createBlog: async (args) => {
+  createBlog: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
     const newBlog = new Blog({
       title: args.blogInput.title,
       description: args.blogInput.description,
@@ -30,29 +33,37 @@ const blogResolver = {
       throw err;
     }
   },
-  editBlog: async (args, id) => {
-    const foundBlog = await Blog.findById(id);
+  editBlog: async (args) => {
+    // eslint-disable-next-line no-underscore-dangle
+    const foundBlog = await Blog.findById(args.updateBlogInput._id);
+    // eslint-disable-next-line no-underscore-dangle
+    console.log('@@@@@@@@@@@edit', foundBlog);
     try {
       if (foundBlog) {
         const updatedBlog = new Blog({
-          _id: id,
+          // eslint-disable-next-line no-underscore-dangle
+          // _id: args.updateBlogInput._id,
           title: args.updateBlogInput.title,
           description: args.updateBlogInput.description,
         });
         const res = await updatedBlog.save();
         return res;
       }
-      return 'Blog not found';
+      throw new Error('Not found');
     } catch (err) {
       throw err;
     }
   },
-  deleteBlog: async (id) => {
-    const isAvailable = await Blog.findById(id);
+  deleteBlog: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
+    // eslint-disable-next-line no-underscore-dangle
+    const isAvailable = await Blog.findById(args.deleteBlogInput._id);
     try {
       if (isAvailable) {
-        const blogs = Blog.find();
-        const updatedArray = blogs.splice(isAvailable);
+        // eslint-disable-next-line no-underscore-dangle
+        const updatedArray = await Blog.deleteOne({ _id: args.deleteBlogInput._id });
         return updatedArray;
       }
       return 'Blog not found';
