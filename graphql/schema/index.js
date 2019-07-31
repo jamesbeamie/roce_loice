@@ -28,6 +28,14 @@ const graphqlSchema = buildSchema(`
         title: String!
         description: String!
     }
+    input updateBlogInput{
+        _id: ID!
+        title: String!
+        description: String!
+    }
+    input deleteBlogInput{
+        _id: ID!
+    }
     
     type Img{
         _id: ID!
@@ -45,12 +53,15 @@ const graphqlSchema = buildSchema(`
 
     type rootQuery{
         blogs: [Blog!]!
+        singleBlog(_id: ID!): Blog 
         login(email: String!, password: String!): authData
         images: [Img!]!
     }
     type rootMutation{
         createUser(userInput: userInput): User
         createBlog(blogInput: blogInput): Blog
+        editBlog(updateBlogInput: updateBlogInput): Blog
+        deleteBlog(deleteBlogInput: deleteBlogInput): Blog
         uploadFile(file: Upload!): Img
     }
 
