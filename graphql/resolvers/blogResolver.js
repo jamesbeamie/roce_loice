@@ -37,17 +37,21 @@ const blogResolver = {
     // eslint-disable-next-line no-underscore-dangle
     const foundBlog = await Blog.findById(args.updateBlogInput._id);
     // eslint-disable-next-line no-underscore-dangle
-    console.log('@@@@@@@@@@@edit', foundBlog);
     try {
       if (foundBlog) {
-        const updatedBlog = new Blog({
+        const updating = await Blog.updateOne(
+          // condition
+          {
           // eslint-disable-next-line no-underscore-dangle
-          // _id: args.updateBlogInput._id,
-          title: args.updateBlogInput.title,
-          description: args.updateBlogInput.description,
-        });
-        const res = await updatedBlog.save();
-        return res;
+            _id: args.updateBlogInput._id,
+          },
+          // replacement
+          {
+            title: args.updateBlogInput.title,
+            description: args.updateBlogInput.description,
+          },
+        );
+        return updating;
       }
       throw new Error('Not found');
     } catch (err) {
