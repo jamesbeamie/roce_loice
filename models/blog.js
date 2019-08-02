@@ -11,6 +11,10 @@ const blogSchema = new Schema({
     type: String,
     required: true,
   },
+  tag: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Blog', blogSchema);
