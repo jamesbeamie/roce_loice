@@ -23,15 +23,18 @@ const graphqlSchema = buildSchema(`
         _id: ID!
         title: String!
         description: String!
+        tag: String! 
     }
     input blogInput{
         title: String!
         description: String!
+        tag: String!
     }
     input updateBlogInput{
         _id: ID!
         title: String!
         description: String!
+        tag: String!
     }
     input deleteBlogInput{
         _id: ID!
@@ -53,7 +56,8 @@ const graphqlSchema = buildSchema(`
 
     type rootQuery{
         blogs: [Blog!]!
-        singleBlog(_id: ID!): Blog 
+        singleBlog(_id: ID!): Blog
+        filterBytag(tag: String!): [Blog!]!
         login(email: String!, password: String!): authData
         images: [Img!]!
     }
