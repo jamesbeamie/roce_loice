@@ -13,6 +13,9 @@ const graphqlSchema = buildSchema(`
         email: String!
         password: String!
     }
+    input updatePwdInput{
+        password: String!
+    }
     type authData{
         userId: ID!
         token: String!
@@ -59,10 +62,12 @@ const graphqlSchema = buildSchema(`
         singleBlog(_id: ID!): Blog
         filterBytag(tag: String!): [Blog!]!
         login(email: String!, password: String!): authData
+        pwdresetRequest(email: String!): authData
         images: [Img!]!
     }
     type rootMutation{
         createUser(userInput: userInput): User
+        resetPwd(updatePwdInput: updatePwdInput): User
         createBlog(blogInput: blogInput): Blog
         editBlog(updateBlogInput: updateBlogInput): Blog
         deleteBlog(deleteBlogInput: deleteBlogInput): Blog
