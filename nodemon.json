@@ -1,5 +1,6 @@
 {
 	"env": {
+		"PORT": "8080",
 		"MONGO_USER": "james",
 		"MONGO_PASSWORD": "glJOadOY0ALfbR06",
 		"MONGO_DB": "homes-dev-db",
