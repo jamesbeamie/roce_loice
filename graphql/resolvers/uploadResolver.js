@@ -6,7 +6,7 @@ const uploadResolver = {
       const image = await Image.find();
       return image;
     } catch (err) {
-      throw err;
+      throw new Error('There was a problem accessing the images');
     }
   },
   uploadFile: async (args) => {
@@ -18,7 +18,6 @@ const uploadResolver = {
       path: args.file.path,
     });
     const thefile = await image.save();
-    console.log(thefile);
     return thefile;
   },
 };

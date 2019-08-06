@@ -29,12 +29,12 @@ const userAuth = {
   login: async ({ email, password }) => {
     const presentUser = await User.findOne({ email });
     if (!presentUser) {
-      throw new Error('No user');
+      throw new Error('You are not registered');
     }
 
     const validPwd = await bycript.compare(password, presentUser.password);
     if (!validPwd) {
-      throw new Error('invalid pwd');
+      throw new Error('invalid credentials');
     }
     const userToken = jwt.sign({ userId: presentUser.id, email: presentUser.email }, 'secretkeyfortoken', {
       expiresIn: '1hr',
@@ -55,20 +55,20 @@ const userAuth = {
         resetPwdTokenExpires: Date.now + 360000,
       });
     } else {
-      return Error('User Not found');
+      throw new Error('User not found');
     }
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 587,
+      port: process.env.EMAIL_PORT,
       secure: false,
       requireTLS: true,
       auth: {
-        user: 'wafulajames9@gmail.com',
-        pass: 'manchester10',
+        user: process.env.EMAIL_USER,
+        pass: process.env.PWD,
       },
     });
     const meailOptions = {
-      from: `wafulajames9@gmail.com`,
+      from: process.env.EMAIL_SENDER,
       to: `${registeredUser.email}`,
       subject: `Password reset`,
       text:
@@ -78,7 +78,7 @@ const userAuth = {
     // I will add a frontend link to reset password
     return transporter.sendMail(meailOptions, (err, response) => {
       if (err) {
-        throw new Error(err);
+        throw new Error('There was a problem sending the reset email');
       }
       return response;
     });

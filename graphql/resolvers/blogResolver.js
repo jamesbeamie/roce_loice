@@ -4,10 +4,9 @@ const blogResolver = {
   blogs: async () => {
     try {
       const blogs = await Blog.find();
-      console.log('blogs', blogs);
       return blogs;
     } catch (err) {
-      throw err;
+      throw new Error('Blogs not found');
     }
   },
   singleBlog: async (args) => {
@@ -16,7 +15,7 @@ const blogResolver = {
       const blog = await Blog.findById(args._id);
       return blog;
     } catch (err) {
-      throw err;
+      throw new Error('Blog not found');
     }
   },
   createBlog: async (args, req) => {
@@ -32,10 +31,13 @@ const blogResolver = {
       const res = await newBlog.save();
       return res;
     } catch (err) {
-      throw err;
+      throw new Error('There was a problem creating a blog');
     }
   },
-  editBlog: async (args) => {
+  editBlog: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
     // findOneAndUpdate
     // eslint-disable-next-line no-underscore-dangle
     const foundBlog = await Blog.findById(args.updateBlogInput._id);
@@ -56,9 +58,9 @@ const blogResolver = {
         );
         return updating;
       }
-      throw new Error('Not found');
+      throw new Error('Blog not found');
     } catch (err) {
-      throw err;
+      throw new Error('There was a problem editing the blog');
     }
   },
   deleteBlog: async (args, req) => {
@@ -74,9 +76,9 @@ const blogResolver = {
         const updatedArray = await Blog.deleteOne({ _id: args.deleteBlogInput._id });
         return updatedArray;
       }
-      return 'Blog not found';
+      throw new Error('Blog not found');
     } catch (err) {
-      throw err;
+      throw new Error('There was a problem deleting a blog');
     }
   },
 
@@ -84,10 +86,9 @@ const blogResolver = {
     try {
       // eslint-disable-next-line no-underscore-dangle
       const blogsfilter = await Blog.find({ tag: args.tag });
-      console.log('blogs', blogsfilter);
       return blogsfilter;
     } catch (err) {
-      throw err;
+      throw new Error('There was a problem accessing the blog');
     }
   },
 };
