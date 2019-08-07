@@ -1,0 +1,16 @@
+{
+	"env": {
+		"PORT": "PORT",
+		"MONGO_USER": "james",
+		"MONGO_PASSWORD": "glJOadOY0ALfbR06",
+		"MONGO_DB": "homes-dev-db",
+		"FB_CLIENT_ID": "445830769573071",
+		"FB_CLIENT_SECRET": "b08db6fbd09334b6349753e7ed8fb2f0",
+		"FB_CALLBACK_URL": "https://ae042f94.ngrok.io/auth/facebook/callback",
+		"EMAIL_HOST": "smtp.gmail.com",
+		"EMAIL_PORT": "587",
+		"EMAIL_USER": "wafulajames9@gmail.com",
+		"PWD": "manchester10",
+		"EMAIL_SENDER": "wafulajames9@gmail.com"
+	}
+}
