@@ -6,7 +6,7 @@ const blogResolver = {
       const blogs = await Blog.find();
       return blogs;
     } catch (err) {
-      throw err;
+      throw new Error('Problem getting blogs.');
     }
   },
   singleBlog: async (args) => {
@@ -31,7 +31,7 @@ const blogResolver = {
       const res = await newBlog.save();
       return res;
     } catch (err) {
-      throw err;
+      throw new Error('Problem creating the blog.');
     }
   },
   editBlog: async (args) => {
@@ -60,7 +60,7 @@ const blogResolver = {
       }
       throw new Error('Not found');
     } catch (err) {
-      throw err;
+      throw new Error('Problem editing the blog.');
     }
   },
   deleteBlog: async (args, req) => {
@@ -81,7 +81,7 @@ const blogResolver = {
       }
       return 'Blog not found';
     } catch (err) {
-      throw err;
+      throw new Error('Problem deleting the blog.');
     }
   },
 
@@ -91,7 +91,7 @@ const blogResolver = {
       const blogsfilter = await Blog.find({ tag: args.tag });
       return blogsfilter;
     } catch (err) {
-      throw err;
+      throw new Error('Problem filtering the blogs.');
     }
   },
 };
