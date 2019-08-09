@@ -23,7 +23,7 @@ app.use(apolloUploadExpress({ uploadDir: './ ' }));
 app.use(isAuth);
 
 app.use(
-  '/graphql',
+  '/photography',
   expressGraphQL({
     schema: graphQLSchema,
     rootValue: rootResolver,

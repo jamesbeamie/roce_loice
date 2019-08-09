@@ -80,7 +80,10 @@ const userAuth = {
       if (err) {
         throw new Error(err);
       }
-      return response;
+      return {
+        response,
+        message: 'Request sent, check your email',
+      };
     });
   },
 
@@ -96,7 +99,10 @@ const userAuth = {
         password: hashdpwd,
       },
     );
-    return resetPassword;
+    return {
+      resetPassword,
+      message: 'password succesfully updated',
+    };
   },
 };
 

@@ -4,7 +4,6 @@ const blogResolver = {
   blogs: async () => {
     try {
       const blogs = await Blog.find();
-      console.log('blogs', blogs);
       return blogs;
     } catch (err) {
       throw err;
@@ -52,9 +51,12 @@ const blogResolver = {
           {
             title: args.updateBlogInput.title,
             description: args.updateBlogInput.description,
+            tag: args.updateBlogInput.tag,
           },
         );
-        return updating;
+        return {
+          updating,
+        };
       }
       throw new Error('Not found');
     } catch (err) {
@@ -72,7 +74,10 @@ const blogResolver = {
       if (isAvailable) {
         // eslint-disable-next-line no-underscore-dangle
         const updatedArray = await Blog.deleteOne({ _id: args.deleteBlogInput._id });
-        return updatedArray;
+        return {
+          updatedArray,
+          message: 'deleted',
+        };
       }
       return 'Blog not found';
     } catch (err) {
@@ -84,7 +89,6 @@ const blogResolver = {
     try {
       // eslint-disable-next-line no-underscore-dangle
       const blogsfilter = await Blog.find({ tag: args.tag });
-      console.log('blogs', blogsfilter);
       return blogsfilter;
     } catch (err) {
       throw err;
