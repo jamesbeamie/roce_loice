@@ -59,16 +59,16 @@ const userAuth = {
     }
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 587,
+      port: process.env.EMAIL_PORT,
       secure: false,
       requireTLS: true,
       auth: {
-        user: 'wafulajames9@gmail.com',
-        pass: 'manchester10',
+        user: process.env.EMAIL_USER,
+        pass: process.env.PWD,
       },
     });
     const meailOptions = {
-      from: `wafulajames9@gmail.com`,
+      from: process.env.EMAIL_SENDER,
       to: `${registeredUser.email}`,
       subject: `Password reset`,
       text:
@@ -78,6 +78,7 @@ const userAuth = {
     // I will add a frontend link to reset password
     return transporter.sendMail(meailOptions, (err, response) => {
       if (err) {
+        console.log('err', err);
         throw new Error(err);
       }
       return {
