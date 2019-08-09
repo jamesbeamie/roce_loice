@@ -73,7 +73,7 @@ const userAuth = {
       subject: `Password reset`,
       text:
 				`Hi Rose, this is a royalframes email link to reset your password\n\n`
-				+ `http://localhost:8080/graphql?query=mutation%7B%0A%20%20resetPwd(updatePwdInput%3A%7Bpassword%3A%20%22password1%22%7D)%7B%0A%20%20%20%20userName%0A%20%20%7D%0A%7D%0A`,
+				+ `http://localhost:8080/photography?query=mutation%7B%0A%20%20resetPwd(updatePwdInput%3A%7Bpassword%3A%20%22password1%22%7D)%7B%0A%20%20%20%20userName%0A%20%20%7D%0A%7D%0A`,
     };
     // I will add a frontend link to reset password
     return transporter.sendMail(meailOptions, (err, response) => {
