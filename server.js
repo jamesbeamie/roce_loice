@@ -61,7 +61,7 @@ mongoose
     { useNewUrlParser: true },
   )
   .then(() => {
-    app.listen(8080);
+    app.listen(process.env.PORT || 8080);
     console.log('connected to server');
   })
   .catch((err) => {
