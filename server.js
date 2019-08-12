@@ -31,28 +31,6 @@ app.use(
   }),
 );
 
-// app.use(passport.initialize());
-
-// passport.use(
-//   new FacebookStrategy(
-//     {
-//       clientID: process.env.FB_CLIENT_ID,
-//       clientSecret: process.env.FB_CLIENT_SECRET,
-//       callbackURL: process.env.FB_CALLBACK_URL,
-//     },
-//     (accessToken, refreshToken, profile, cb) => {
-//       console.log(profile);
-//       cb(null, profile);
-//     },
-//   ),
-// );
-
-// app.get('/fblogin', passport.authenticate('facebook'));
-
-// app.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), (req, res) => {
-//   res.send('authenticated');
-// });
-
 // database connection
 mongoose
   .connect(
