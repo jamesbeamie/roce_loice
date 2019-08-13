@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 app.use(apolloUploadExpress({ uploadDir: './ ' }));
 // app.post('/upload', upload.fields([{ name: 'file' }]));
 
+// eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
