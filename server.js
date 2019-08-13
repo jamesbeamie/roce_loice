@@ -19,6 +19,16 @@ app.use(bodyParser.json());
 app.use(apolloUploadExpress({ uploadDir: './ ' }));
 // app.post('/upload', upload.fields([{ name: 'file' }]));
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 // authentication middleware
 app.use(isAuth);
 
